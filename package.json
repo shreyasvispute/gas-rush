@@ -1,0 +1,25 @@
+{
+  "name": "gas-rush",
+  "version": "1.0.0",
+  "description": "Check Ethereum gas prices",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node app.js"
+  },
+  "keywords": [
+    "crypto",
+    "gas",
+    "ethereum",
+    "blockchain"
+  ],
+  "author": "ShreyasVispute",
+  "license": "ISC",
+  "dependencies": {
+    "axios": "^0.26.0",
+    "dotenv": "^16.0.0",
+    "express": "^4.17.3",
+    "moment": "^2.29.1",
+    "mongo": "^0.1.0"
+  }
+}
