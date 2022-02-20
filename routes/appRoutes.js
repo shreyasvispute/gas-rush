@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const gasData = require("../data/appData");
+const validations = require("../data/errorHandling");
 
 router.get("/gas", async (req, res) => {
   try {
@@ -31,7 +32,7 @@ router.get("/average", async (req, res) => {
   if (!req.query.toTime) {
     res.status(400).json({
       error: true,
-      message: "toTime is reqired",
+      message: "toTime is required",
     });
     return;
   }
@@ -39,7 +40,7 @@ router.get("/average", async (req, res) => {
   let toTime = Number(req.query.toTime);
 
   try {
-    gasData.validateTime(fromTime, toTime);
+    validations.validateTime(fromTime, toTime);
 
     const getGasData = await gasData.getGasAverage(fromTime, toTime);
     if (getGasData) {

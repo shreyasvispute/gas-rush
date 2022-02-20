@@ -12,6 +12,7 @@ const getCollectionFn = (collection) => {
     return _col;
   };
 };
+
 module.exports = {
-  gasPricesDB: getCollectionFn("gasprices"),
+  gasPricesDB: getCollectionFn("ethgas"),
 };
