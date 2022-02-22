@@ -8,10 +8,8 @@
     "start": "node app.js"
   },
   "keywords": [
-    "crypto",
     "gas",
-    "ethereum",
-    "blockchain"
+    "ethereum"
   ],
   "author": "ShreyasVispute",
   "license": "ISC",
@@ -20,6 +18,7 @@
     "dotenv": "^16.0.0",
     "express": "^4.17.3",
     "moment": "^2.29.1",
-    "mongo": "^0.1.0"
+    "mongo": "^0.1.0",
+    "winston": "^3.6.0"
   }
 }

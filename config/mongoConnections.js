@@ -1,18 +1,21 @@
+const logger = require("../utils/logger");
+
 const MongoClient = require("mongodb").MongoClient;
 require("dotenv").config();
 
-const db_URL = process.env.MONGODBURL;
+const db_URL = process.env.MONGODB_URL;
 const db_name = process.env.MONGODB_DB;
 
-let _connection = undefined;
-let _db = undefined;
-
 if (!db_URL || !db_name) {
+  logger.error("400 - DB name or DB url not found");
   throw {
     statusCode: 400,
     message: "DB name or DB url not found",
   };
 }
+
+let _connection = undefined;
+let _db = undefined;
 
 module.exports = async () => {
   if (!_connection) {
