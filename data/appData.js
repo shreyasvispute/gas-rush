@@ -1,3 +1,5 @@
+//DB functions to communicate with MongoDB
+
 const mongoCollections = require("../config/mongoCollections");
 const gasPricesDB = mongoCollections.gasPricesDB;
 const axios = require("axios");
@@ -5,11 +7,17 @@ const validations = require("./errorHandling");
 require("dotenv").config();
 const logger = require("../utils/logger");
 
+//POLLTIME from env variable or set polltime to 15s
 const POLLTIME = process.env.POLLTIME || 15000;
+
+// get the API key and URL
 const apiKey = process.env.APIKEY;
 const apiURL = process.env.APIURL;
 
-const url = apiURL + apiKey;
+const url = apiURL + apiKey; //Etherscan URL
+
+//Data function for calling Etherscan URL
+//Current Rate limits of Etherscan URL = 5 req/sec on free account
 
 async function getGasData() {
   if (!apiKey) {
@@ -38,10 +46,25 @@ async function getGasData() {
   return data;
 }
 
+//timeout function for API polling
 function delay(ms) {
   return new Promise((resolve) => setTimeout(resolve, ms));
 }
 
+/*  Polling function to poll Etherscan URL every <POLLTIME> ms,
+    stores data to DB
+    MONGODB EXAMPLE DATA OBJECT STORED IN DB
+      "_id": {
+        $oid: "6213d4e34cd7cf0372f1a0c9",
+      },
+      "fast": 183,
+      "slow": 182,
+      "average": 182,
+      "blockNum": 14250934,
+      "lastUpdatedAt": 1645466857
+
+    Current Rate limits of Etherscan URL = 5 req/sec on free account, Stops polling if PollTime < 1 sec 
+*/
 async function storeGasPrices() {
   const data = await getGasData();
 
@@ -83,6 +106,7 @@ async function storeGasPrices() {
   }
 }
 
+// GET /gas API method, returns the current gas prices from the Etherscan URL
 async function getGas() {
   const data = await getGasData();
 
@@ -92,16 +116,19 @@ async function getGas() {
     average: Number(data.result.ProposeGasPrice),
     blockNum: Number(data.result.LastBlock),
   };
-
   return gasData;
 }
 
+//GET /average API method, gets the average of from time to time gas price
 async function getGasAverage(fromTime, toTime = validations.checkParameters()) {
   validations.validateTime(fromTime, toTime);
+
+  //validate from time || to time exists in DB
   await checkDatesInDB(fromTime, toTime);
 
   const dbCollection = await gasPricesDB();
 
+  //Mongodb function to get the data
   const data = await dbCollection
     .find({
       lastUpdatedAt: {
@@ -110,6 +137,7 @@ async function getGasAverage(fromTime, toTime = validations.checkParameters()) {
       },
     })
     .toArray();
+
   let result = {};
   if (data.length > 0) {
     const averageETHPrice = Math.round(average(data));
@@ -129,6 +157,7 @@ async function getGasAverage(fromTime, toTime = validations.checkParameters()) {
   return result;
 }
 
+//check function to validate if the time provided is in the DB
 async function checkDatesInDB(fromTime, toTime) {
   const dbCollection = await gasPricesDB();
 
@@ -142,17 +171,18 @@ async function checkDatesInDB(fromTime, toTime) {
   if (!checkFromTime) {
     throw {
       statusCode: 404,
-      message: "from date not found",
+      message: `No data found from :${fromTime} to :${toTime}`,
     };
   }
   if (!checkToTime) {
     throw {
       statusCode: 404,
-      message: "to date not found",
+      message: `No data found from :${fromTime} to :${toTime}`,
     };
   }
 }
 
+//average function to calculate the average gas price between to time and from time
 function average(data) {
   const averageETHPrices = data
     .filter((j) => j.average > 0)
@@ -160,4 +190,4 @@ function average(data) {
   return averageETHPrices.reduce((a, v) => a + v) / averageETHPrices.length;
 }
 
-module.exports = { getGas, getGasAverage, storeGasPrices };
+module.exports = { getGas, getGasAverage, storeGasPrices, average };

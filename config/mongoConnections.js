@@ -1,3 +1,7 @@
+//MongoDB connection file, initiates the connection by accessing
+//MONGODB_URL and MONGODB_DB name from env variables.
+//exports connection object
+
 const logger = require("../utils/logger");
 
 const MongoClient = require("mongodb").MongoClient;

@@ -1,7 +1,7 @@
 const appRoutes = require("./appRoutes");
 
 const constructorMethod = (app) => {
-  app.use("/", appRoutes);
+  app.use("/", appRoutes); //main(/) routes here...
   app.use("*", (req, res) => {
     res.status(404).json({ error: "Path Not Found" });
   });

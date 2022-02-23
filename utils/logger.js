@@ -1,3 +1,7 @@
+//Logger utility to log requests, errors and application flow,
+//Winston npm used for logging events
+//creates logs folder in root directory, with filename = gas-rush.log
+
 const { createLogger, format, transports } = require("winston");
 
 module.exports = createLogger({

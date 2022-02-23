@@ -1,9 +1,11 @@
+//Route file to handle API requests
 const express = require("express");
 const router = express.Router();
 const gasData = require("../data/appData");
 const validations = require("../data/errorHandling");
 const logger = require("../utils/logger");
 
+//GET /gas - outputs gas prices with average, low, and fast prices in Gwie
 router.get("/gas", async (req, res) => {
   try {
     const getGasData = await gasData.getGas();
@@ -23,7 +25,9 @@ router.get("/gas", async (req, res) => {
   }
 });
 
+//GET /average- outputs average price between provided from time and to time, average price in Gwie
 router.get("/average", async (req, res) => {
+  //validations
   if (!req.query.fromTime) {
     res.status(400).json({
       error: true,
@@ -43,6 +47,7 @@ router.get("/average", async (req, res) => {
     return;
   }
 
+  //convert time to number
   let fromTime = Number(req.query.fromTime);
   let toTime = Number(req.query.toTime);
 
