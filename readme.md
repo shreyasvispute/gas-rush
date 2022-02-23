@@ -11,14 +11,17 @@ Crypto exchanges constantly interact with Ethereum blockchain to carry out vario
 To run the application we need to set environment variables, edit example.env to .env
 
 - Etherscan API Key to get gas prices from data-feed
-  `Create an account to get the API key` - [Etherscan](https://docs.etherscan.io/getting-started/creating-an-account)
+
+  1. `Create an account to get the API key` - [Etherscan](https://docs.etherscan.io/getting-started/creating-an-account)
+
 - Set variables
-  `PORT` - Specifies which port server should run on
-  `MONGODB_URL` - Set the connection string of MongoDB
-  `MONGODB_DB`- Set your DB name here
-  `POLLTIME`- Polling time in ms
-  `APIKEY` - Enter your API key here
-  `APIURL` - Etherscan API URL here
+
+1. `PORT` - Specifies which port server should run on
+2. `MONGODB_URL` - Set the connection string of MongoDB
+3. `MONGODB_DB`- Set your DB name here
+4. `POLLTIME`- Polling time in ms
+5. `APIKEY` - Enter your API key here
+6. `APIURL` - Etherscan API URL here
 
 you can find starter variables given except for the Etherscan API KEY in example.env
 
@@ -52,6 +55,8 @@ npm test
 
 - [MongoDB](https://www.mongodb.com/)
 - [Node.js](https://nodejs.org/en/)
+
+### Fundamentals
 
 ## Authors
 
