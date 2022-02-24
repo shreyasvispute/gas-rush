@@ -36,7 +36,7 @@ npm install
 npm start
 ```
 
-To run the Docker Image run:
+A Dockerfile is included in the deployment, To run it:
 
 ```
 docker-compose build
