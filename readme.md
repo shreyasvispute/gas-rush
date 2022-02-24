@@ -39,8 +39,8 @@ npm start
 To run the Docker Image run:
 
 ```
-docker build -t ethgasstation-api .
-docker run -p 3000:3000 gas-rush
+docker-compose build
+docker-compose up
 ```
 
 ## Running the tests
