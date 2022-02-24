@@ -60,11 +60,11 @@ Technologies used:
 
 ### Fundamentals
 
-Application uses REST API which polls Etherscan API every POLLTIME ms that gets the data and stores it in MongoDB with fast, low and average prices.
+...Application uses REST API which polls Etherscan API every POLLTIME ms that gets the data and stores it in MongoDB with fast, low and average prices.
 Application architecture could further be imporved by adding websockets which could handle the data in real-time, we can use socket.io or any other library for that purpose.
-UI in application can further be insightful by adding charts that prove comphrensible by including the historical data that is stored in the application. We can use Angular or React.js to build the frontend components.
+...UI in application can further be insightful by adding charts that prove comphrensible by including the historical data that is stored in the application. We can use Angular or React.js to build the frontend components.
 Data from Etherscan and EthGasStation and other publicly available APIs can be integrated to further improve insights. We have used Etherscan for ingesting gas prices into the DB.
-We can use Firebase or Kafka to get and store real time data from the APIs and use the data into the application. A full-fledge application can be built by integrating login system where user can subscribe to the prices and get real time updates on the gas prices.
+...We can use Firebase or Kafka to get and store real time data from the APIs and use the data into the application. A full-fledge application can be built by integrating login system where user can subscribe to the prices and get real time updates on the gas prices.
 
 ## API Usage Docs
 
