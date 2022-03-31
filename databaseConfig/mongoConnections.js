@@ -21,7 +21,8 @@ if (!db_URL || !db_name) {
 let _connection = undefined;
 let _db = undefined;
 
-module.exports = async () => {
+let mongoConnection = async () => {
+  //lets you use only a single instance
   if (!_connection) {
     _connection = await MongoClient.connect(db_URL, {
       useNewUrlParser: true,
@@ -31,3 +32,5 @@ module.exports = async () => {
   }
   return { _db, _connection };
 };
+
+module.exports = mongoConnection;

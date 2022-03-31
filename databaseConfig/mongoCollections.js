@@ -6,6 +6,7 @@ const getCollectionFn = (collection) => {
   let _col = undefined;
 
   return async () => {
+    //creates a single instance
     if (!_col) {
       const db = await dbConnection();
       _col = await db._db.collection(collection);

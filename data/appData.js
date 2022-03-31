@@ -1,6 +1,6 @@
 //DB functions to communicate with MongoDB
 
-const mongoCollections = require("../config/mongoCollections");
+const mongoCollections = require("../databaseConfig/mongoCollections");
 const gasPricesDB = mongoCollections.gasPricesDB;
 const axios = require("axios");
 const validations = require("./errorHandling");
