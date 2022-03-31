@@ -178,4 +178,4 @@ async function checkDatesInDB(fromTime, toTime) {
   }
 }
 
-module.exports = { getGas, getGasAverage, storeGasPrices, average };
+module.exports = { getGas, getGasAverage, storeGasPrices };

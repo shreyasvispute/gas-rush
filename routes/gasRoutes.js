@@ -1,7 +1,7 @@
 //Route file to handle API requests
 const express = require("express");
 const router = express.Router();
-const gasData = require("../data/appData");
+const gasData = require("../data/gasData");
 const validations = require("../data/errorHandling");
 const logger = require("../utils/logger");
 

@@ -1,4 +1,4 @@
-const appRoutes = require("./appRoutes");
+const appRoutes = require("./gasRoutes");
 
 const constructorMethod = (app) => {
   app.use("/", appRoutes); //main(/) routes here...

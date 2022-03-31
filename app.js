@@ -1,5 +1,5 @@
 const express = require("express");
-const gasData = require("./data/appData");
+const gasData = require("./data/gasData");
 const logger = require("./utils/logger");
 require("dotenv").config();
 
