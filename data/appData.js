@@ -6,6 +6,7 @@ const axios = require("axios");
 const validations = require("./errorHandling");
 require("dotenv").config();
 const logger = require("../utils/logger");
+const helpers = require("../utils/helpers");
 
 //POLLTIME from env variable or set polltime to 15s
 const POLLTIME = process.env.POLLTIME || 15000;
@@ -44,11 +45,6 @@ async function getGasData() {
   });
 
   return data;
-}
-
-//timeout function for API polling
-function delay(ms) {
-  return new Promise((resolve) => setTimeout(resolve, ms));
 }
 
 /*  Polling function to poll Etherscan URL every <POLLTIME> ms,
@@ -90,7 +86,7 @@ async function storeGasPrices() {
     };
   }
 
-  await delay(POLLTIME);
+  await helpers.delay(POLLTIME);
 
   if (result.insertedId) {
     await storeGasPrices();
@@ -140,7 +136,7 @@ async function getGasAverage(fromTime, toTime = validations.checkParameters()) {
 
   let result = {};
   if (data.length > 0) {
-    const averageETHPrice = Math.round(average(data));
+    const averageETHPrice = Math.round(helpers.average(data));
 
     result = {
       averageGasPrice: averageETHPrice,
@@ -180,14 +176,6 @@ async function checkDatesInDB(fromTime, toTime) {
       message: `No data found from :${fromTime} to :${toTime}`,
     };
   }
-}
-
-//average function to calculate the average gas price between to time and from time
-function average(data) {
-  const averageETHPrices = data
-    .filter((j) => j.average > 0)
-    .map((i) => i.average);
-  return averageETHPrices.reduce((a, v) => a + v) / averageETHPrices.length;
 }
 
 module.exports = { getGas, getGasAverage, storeGasPrices, average };
