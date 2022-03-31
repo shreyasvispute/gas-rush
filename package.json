@@ -14,12 +14,12 @@
   "author": "ShreyasVispute",
   "license": "ISC",
   "dependencies": {
-    "axios": "^0.26.0",
-    "dotenv": "^16.0.0",
-    "express": "^4.17.3",
-    "jest": "^27.5.1",
-    "moment": "^2.29.1",
-    "mongo": "^0.1.0",
-    "winston": "^3.6.0"
+    "axios": "0.26.0",
+    "dotenv": "16.0.0",
+    "express": "4.17.3",
+    "jest": "27.5.1",
+    "moment": "2.29.1",
+    "mongo": "0.1.0",
+    "winston": "3.6.0"
   }
 }
