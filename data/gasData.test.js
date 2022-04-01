@@ -1,6 +1,6 @@
 //test file
-const appData = require("./appData");
-
+const appData = require("./gasData");
+const helpers = require("../utils/helpers");
 let data = [
   {
     _id: "6213d4e34cd7cf0372f1a0c9",
@@ -21,7 +21,7 @@ let data = [
 ];
 describe("average function test", () => {
   test("given a data object it should return the average", () => {
-    expect(appData.average(data)).toBe(182);
+    expect(helpers.average(data)).toBe(182);
   });
 });
 

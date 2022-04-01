@@ -21,10 +21,8 @@ app.use(function (req, res, next) {
 
 configRoutes(app);
 
-app.listen(port, () => {
-  console.log(`Server running at http://localhost:${port}/`);
-  logger.info(`Server started at http://localhost:${port}/`);
-  logger.info("Polling started, PollTime:" + POLLTIME + " ms");
+//start the server polling
+const startServerPoll = () => {
   gasData.storeGasPrices().catch(function (e) {
     if (e.stack) {
       console.log("Error connecting Mongodb: " + e.message);
@@ -41,4 +39,11 @@ app.listen(port, () => {
       return;
     }
   });
+};
+
+app.listen(port, () => {
+  console.log(`Server running at http://localhost:${port}/`);
+  logger.info(`Server started at http://localhost:${port}/`);
+  logger.info("Polling started, PollTime:" + POLLTIME + " ms");
+  startServerPoll();
 });

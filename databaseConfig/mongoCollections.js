@@ -1,6 +1,7 @@
 //Mongo collection file utility, gets the collections for further operations
 
 const dbConnection = require("./mongoConnections");
+const settings = require("./settings.json");
 
 const getCollectionFn = (collection) => {
   let _col = undefined;
@@ -18,5 +19,5 @@ const getCollectionFn = (collection) => {
 
 //collection name = ethgas
 module.exports = {
-  gasPricesDB: getCollectionFn("ethgas"),
+  gasPricesDB: getCollectionFn(settings.mongoConfig.collectionName),
 };

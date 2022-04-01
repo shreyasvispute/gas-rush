@@ -21,7 +21,7 @@ if (!db_URL || !db_name) {
 let _connection = undefined;
 let _db = undefined;
 
-let mongoConnection = async () => {
+const mongoConnection = async () => {
   //lets you use only a single instance
   if (!_connection) {
     _connection = await MongoClient.connect(db_URL, {
